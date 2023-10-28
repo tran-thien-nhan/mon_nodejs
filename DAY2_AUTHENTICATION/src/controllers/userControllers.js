@@ -18,18 +18,18 @@ const getAllUsers = async (req, res) => {
         }
     } else {
         // Nếu không có phiên đăng nhập, chuyển hướng đến trang đăng nhập người dùng.
-        res.redirect('/user/login');
+        return res.redirect('/user/login');
     }
 }
 
 // Route xử lý khi người dùng yêu cầu trang đăng nhập (GET request).
 const getFormLogin = (req, res) => {
     // Hiển thị trang đăng nhập "login" và truyền vào dữ liệu mặc định và lỗi mặc định (null).
-    res.render('login', { data: null, error: null });
+    return res.render('login', { data: null, error: null });
 }
 
 // Route xử lý khi người dùng gửi biểu mẫu đăng nhập (POST request).
-const formCheckLogin = async (req, res, next) => {
+const checkLogin = async (req, res, next) => {
     // Lấy dữ liệu email và password từ biểu mẫu gửi bởi người dùng.
     const { email, password } = req.body;
 
@@ -42,10 +42,23 @@ const formCheckLogin = async (req, res, next) => {
         req.session.user = user;
 
         // Chuyển hướng người dùng đến trang "user".
-        res.redirect('/user');
+        return res.redirect('/user');
     } else {
         // Nếu không tìm thấy người dùng (sai thông tin đăng nhập).
         // Hiển thị trang đăng nhập "login" lại với thông báo lỗi và dữ liệu biểu mẫu.
-        res.render('login', { error: 'Error', data: { email, password } });
+        return res.render('login', { error: 'Error', data: { email, password } });
     }
 }
+
+// Xuất một đối tượng chứa các phương thức và route handlers
+module.exports = {
+    // Route handler để lấy danh sách tất cả người dùng
+    getAllUsers,
+
+    // Route handler để hiển thị trang đăng nhập và truyền dữ liệu mặc định và lỗi mặc định
+    getFormLogin,
+
+    // Route handler xử lý đăng nhập người dùng
+    checkLogin
+}
+

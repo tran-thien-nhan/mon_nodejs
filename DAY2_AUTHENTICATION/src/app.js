@@ -14,7 +14,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/userdb')
     });
 app.use(express.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
-app.set('views engine', 'ejs');
+app.set('view engine', 'ejs'); 
 
 //cài đặt session
 app.use(session({
@@ -24,15 +24,14 @@ app.use(session({
 }))
 
 //xử lý middleware
+app.use((req, res, next) => {
+    res.locals.user = req.session.user;
+    res.locals.message = req.session.message;
+    delete req.session.message;
+    next();
+});
 
-// app.use((req, res, next) => {
-//     res.locals.user = req.session.user;
-//     res.locals.message = req.session.message;
-//     delete req.session.message;
-//     next();
-// });
-
-//app.use(rootRouter);
+app.use(rootRouter);
 
 const PORT = 3000;
 app.listen(PORT);

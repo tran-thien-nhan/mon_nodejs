@@ -9,9 +9,8 @@
   "name": "day2_authentication",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
-    "start":"nodemon src/app",
+    "start": "nodemon src/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
