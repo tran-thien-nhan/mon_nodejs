@@ -2,10 +2,10 @@ const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const rootRouter = require("./routers/rootRouter");
-const mongoose = require('mongoose');
-//const { default: mongoose } = mongoose('mongoose');
+//const mongoose = require('mongoose');
+const { default: mongoose } = require('mongoose');
 const app = express();
-mongoose.connect('mongodb://127.0.0.127017/userdb', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://127.0.0.1:27017/userdb')
     .then(() => {
         console.log("connect success");
     })
