@@ -1,8 +1,8 @@
 function taskOne(callback) {
     setTimeout(() => {
         // Biến data sẽ có giá trị sau 3 giây
-        const data = "this is my data";
-        callback(data);
+        data = "this is my data";
+        callback(data);        
     }, 3000);
 }
 
