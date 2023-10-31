@@ -16,7 +16,7 @@ const productSchema = new Schema({
             return /\.(jpq|jpeg|png)$/i.test(v);
         },
         require: [true, 'image is require'],
-    }
+    },
 });
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;
