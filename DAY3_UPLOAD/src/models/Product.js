@@ -1,21 +1,24 @@
-const { Schema, default: mongoose } = require("mongoose");
+const { Schema, default: mongoose } = require('mongoose');
 const productSchema = new Schema({
     name: {
         type: String,
-        require: [true, 'Name is require'],
+        required: [true, 'Name is required']
     },
     price: {
         type: Number,
-        require: [true, 'Price is require'],
-        min: [2, "min is 2"],
-        max: [2000, "min is 2000"]
+        required: [true, 'Price is required'],
+        min: [2, 'min is 2'],
+        max: [2000, 'max is 2000']
     },
     image: {
         type: String,
-        validator: function (v) {
-            return /\.(jpq|jpeg|png)$/i.test(v);
+        validate: {
+            validator: function (v) {
+                return /\.(jpg|jpeg|png)$/i.test(v);
+            },
+            message: (props) => `${props.value} allow type: jpq, jpeg, png`
         },
-        require: [true, 'image is require'],
+        required: [true, 'Image is required']
     },
 });
 const Product = mongoose.model('Product', productSchema);
