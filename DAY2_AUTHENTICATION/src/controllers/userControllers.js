@@ -59,11 +59,12 @@ const createUser = async (req, res) => {
         })
 }
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
     const userId = req.params.id;
-    User.findByIdAndRemove(userId, (err) => {
-        req.session.message = "user deleted successfully";
-    });
+    const result = await User.deleteOne({ _id: userId });
+    if (result.deletedCount > 0) {
+        res.redirect('/user');
+    } 
 }
 
 const logout = (req, res) => {
