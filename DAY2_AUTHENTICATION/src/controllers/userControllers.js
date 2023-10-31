@@ -21,6 +21,7 @@ const checkLogin = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email, password });
     if (user) {
+        //đăng ký session chính là user
         req.session.user = user;
         return res.redirect('/user');
     } else {
@@ -62,10 +63,19 @@ const deleteUser = (req, res) => {
     const userId = req.params.id;
     User.findByIdAndRemove(userId, (err) => {
         req.session.message = "user deleted successfully";
-        console.log(err);
     });
 }
 
+const logout = (req, res) => {
+    req.session.destroy();
+    res.redirect('/user/login');
+}
+
+const getDetailUser = (req, res) => {
+    //dựa vào session để in thông tin ra
+    res.render('detail');
+}
+
 module.exports = {
-    getFormLogin, checkLogin, getAllUsers, getFormCreateUser, createUser, deleteUser
+    getFormLogin, checkLogin, getAllUsers, getFormCreateUser, createUser, deleteUser, logout, getDetailUser
 }
