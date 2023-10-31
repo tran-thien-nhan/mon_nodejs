@@ -28,20 +28,16 @@ const checkLogin = async (req, res, next) => {
     }
 }
 
-
-
 const getFormCreateUser = (req, res) => {
-    // if(req.session.user){
-    //     if(req.session.user.role == "admin"){
-    //         return res.render('create', {data:null, error:null});
-    //     }else{
-    //         return res.redirect('/user/detail');
-    //     }
-    // }else{
-    //     return res.redirect('/user/login');
-    // }    
-
-    return res.render('create', { data: null, error: null });
+    if (req.session.user) {
+        if (req.session.user.role == "admin") {
+            return res.render('create', { data: null, errors: null });
+        } else {
+            return res.redirect('/user/detail');
+        }
+    } else {
+        return res.redirect('/user/login');
+    }
 }
 
 const createUser = async (req, res) => {
@@ -55,15 +51,21 @@ const createUser = async (req, res) => {
             if (err.name === 'ValidationError') {
                 let errors = {};
                 for (const field in err.errors) {
-                    if (Object.hasOwnProperty.call(object, field)) {
-                        errors[field] = err.errors[field].message;
-                    }
+                    errors[field] = err.errors[field].message;
                 }
                 res.render('create', { errors, data });
             }
         })
 }
 
+const deleteUser = (req, res) => {
+    const userId = req.params.id;
+    User.findByIdAndRemove(userId, (err) => {
+        req.session.message = "user deleted successfully";
+        console.log(err);
+    });
+}
+
 module.exports = {
-    getFormLogin, checkLogin, getAllUsers, getFormCreateUser, createUser
+    getFormLogin, checkLogin, getAllUsers, getFormCreateUser, createUser, deleteUser
 }

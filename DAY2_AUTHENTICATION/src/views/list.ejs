@@ -26,6 +26,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Age</th>
@@ -36,6 +37,9 @@
                             <tbody>
                                 <% users.forEach(item=> { %>
                                     <tr>
+                                        <td>
+                                            <%= item.id %>
+                                        </td>
                                         <td>
                                             <%= item.name %>
                                         </td>
@@ -49,8 +53,8 @@
                                             <%= item.role %>
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-success">update</a>
-                                            <button class="btn btn-warning">delete</button>
+                                            <a href="/update/<%= item.id%>" class="btn btn-success">update</a>
+                                            <a href="/delete/<%= item.id%>" class="btn btn-warning">delete</a>
                                         </td>
                                     </tr>
                                     <% }); %>
