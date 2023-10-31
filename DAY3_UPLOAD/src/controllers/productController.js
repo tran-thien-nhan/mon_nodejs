@@ -34,6 +34,14 @@ const createProduct = async (req, res) => {
         })
 }
 
+const deleteProduct = async (req, res) => {
+    const productId = req.params.id;
+    const result = await Product.deleteOne({ _id: productId });
+    if (result.deletedCount > 0) {
+        res.redirect('/product');
+    } 
+}
+
 module.exports = {
-    getAllProduct, getFormCreate, createProduct
+    getAllProduct, getFormCreate, createProduct, deleteProduct
 }
