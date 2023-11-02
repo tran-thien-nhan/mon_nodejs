@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Update product: <%= data ? data.name : '' %>
+        </h1>
+        <form action="/product/edit/<%= data ? data.id : '' %>" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<%= data ? data.id : '' %>">
+            <input type="hidden" name="current_image" value="<%= data ? data.image : '' %>">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control" value="<%= data ? data.name : '' %>">
+                <span class="text-danger">
+                    <%= errors ? errors.name : '' %>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price" class="form-control" value="<%= data ? data.price : '' %>">
+                <span class="text-danger">
+                    <%= errors ? errors.price : '' %>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image" class="form-control">
+                <div class="current_image">
+                    <img src="<%= data ? data.image : '' %>" width="100px" alt="">  
+                </div>
+                <span class="text-danger">
+                    <%= errors ? errors.image : '' %>
+                </span>
+            </div>
+            <input type="submit" class="btn btn-success" value="Edit">
+        </form>
+    </div>
+</body>
+
+</html>

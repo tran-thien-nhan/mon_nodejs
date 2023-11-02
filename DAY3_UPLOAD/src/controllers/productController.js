@@ -38,18 +38,18 @@ const getFormEdit = async (req, res) => {
     const { id } = req.params;
     await Product.findById(id)
         .then(result => {
-            res.render('edit', { errors: null, data: null });
+            res.render('edit', { errors: null, data: result });
         })
         .catch(err => {
             res.redirect("/product");
-        });
+        })
 }
 
 const editProduct = async (req, res) => {
     let { id, name, price, current_image } = req.body;
     let imageUrl;
     if (req.file) {
-        imageUrl = `upload/${req.file.filename}`;
+        imageUrl = `/upload/${req.file.filename}`;
     } else {
         imageUrl = current_image;
     }
@@ -62,7 +62,7 @@ const editProduct = async (req, res) => {
     const opts = { runValidators: true };
     await Product.updateOne({}, dataSubmit, opts)
         .then(result => {
-            res.session.message = "Product updated successfully";
+            req.session.message = "Product updated successfully";
             res.redirect("/product");
         })
         .catch(err => {
@@ -71,19 +71,10 @@ const editProduct = async (req, res) => {
                 for (const field in err.errors) {
                     errors[field] = err.errors[field].message;
                 }
-                res.render('create', { errors, data: dataSubmit });
+                res.render('edit', { errors, data: dataSubmit });
             }
         })
 }
-
-//code này vẫn hiệu quả
-// const deleteProduct = async (req, res) => {
-//     const productId = req.params.id;
-//     const result = await Product.deleteOne({ _id: productId });
-//     if (result.deletedCount > 0) {
-//         res.redirect('/product');
-//     }
-// }
 
 const deleteProduct = async (req, res) => {
     const { id } = req.params;
@@ -105,6 +96,11 @@ const deleteProduct = async (req, res) => {
         })
 }
 
+const nhapForm = (req, res) => {
+    res.render('nhap', { data: null, errors: null });
+
+}
+
 module.exports = {
-    getAllProduct, getFormCreate, createProduct, deleteProduct, editProduct, getFormEdit
+    getAllProduct, getFormCreate, createProduct, deleteProduct, editProduct, getFormEdit, nhapForm
 }
