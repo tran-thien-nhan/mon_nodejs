@@ -64,7 +64,24 @@ const deleteUser = async (req, res) => {
     const result = await User.deleteOne({ _id: userId });
     if (result.deletedCount > 0) {
         res.redirect('/user');
-    } 
+    }
+}
+
+const getFormUpdateUser = async (req, res) => {
+    const userId = req.params.id;
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+        return res.render('update', { data: user, errors: null });
+    } else {
+        return res.redirect('/user/detail');
+    }
+}
+
+const updateUser = async (req, res) => {
+    const userId = req.params.id;
+    const updatedData = req.body;
+    const user = await User.findOneAndUpdate({ _id: userId }, updatedData, { new: true });
+    return res.redirect('/user');
 }
 
 const logout = (req, res) => {
@@ -78,5 +95,5 @@ const getDetailUser = (req, res) => {
 }
 
 module.exports = {
-    getFormLogin, checkLogin, getAllUsers, getFormCreateUser, createUser, deleteUser, logout, getDetailUser
+    getFormLogin, checkLogin, getAllUsers, getFormCreateUser, createUser, deleteUser, logout, getDetailUser, getFormUpdateUser, updateUser
 }

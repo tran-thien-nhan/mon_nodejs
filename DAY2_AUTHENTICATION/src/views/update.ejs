@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Update User: <%= data ? data.name : '' %>
+        </h1>
+        <form action="/user/update/<%= data.id%>" method="post">
+            <div class="form-group">
+                <label for="">name</label>
+                <input type="text" name="name" class="form-control" value="<%= data ? data.name : '' %>">
+                <span class="text-danger">
+                    <%= errors ? errors.name : '' %>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="">email</label>
+                <input type="text" name="email" class="form-control" value="<%= data ? data.email : '' %>">
+                <span class="text-danger">
+                    <%= errors ? errors.email : '' %>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="">password</label>
+                <input type="password" name="password" class="form-control" value="<%= data ? data.password : '' %>">
+                <span class="text-danger">
+                    <%= errors ? errors.password : '' %>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="">age</label>
+                <input type="number" name="age" class="form-control" value="<%= data ? data.age : '' %>">
+                <span class="text-danger">
+                    <%= errors ? errors.age : '' %>
+                </span>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="role" value="user" <%=data ? (data.role==='user' ? 'checked' : '' ) : '' %>>
+                <label for="">User</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="role" value="admin" <%=data ? (data.role==='admin' ? 'checked' : '' ) : '' %>>
+                <label for="">Admin</label>
+            </div>
+            <button type="submit" class="btn btn-info">UPDATE</button>
+        </form>
+    </div>
+</body>
+
+</html>

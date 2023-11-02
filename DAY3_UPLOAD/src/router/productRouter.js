@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllProduct, getFormCreate, createProduct, deleteProduct } = require('../controllers/productController');
+const { getAllProduct, getFormCreate, createProduct, deleteProduct, editProduct, getFormEdit } = require('../controllers/productController');
 
 const upload = require('../controllers/middleware/uploadFile');
 const productRouter = express.Router();
