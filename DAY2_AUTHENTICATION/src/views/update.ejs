@@ -12,7 +12,8 @@
     <div class="container">
         <h1>Update User: <%= data ? data.name : '' %>
         </h1>
-        <form action="/user/update/<%= data.id%>" method="post">
+        <form action="/user/update/<%= data ? data.id : '' %>" method="post">
+            <!-- <input type="hidden" name="id" value="<%= data ? data.id : '' %>"> -->
             <div class="form-group">
                 <label for="">name</label>
                 <input type="text" name="name" class="form-control" value="<%= data ? data.name : '' %>">
