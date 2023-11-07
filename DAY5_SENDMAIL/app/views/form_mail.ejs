@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>send mail form</h2>
+        <%if(message){%>
+            <%if(message.type="error" ){%>
+                <div class="alert alert-danger">
+                    <strong>Error!</strong>
+                    <%= message.message%>
+                </div>
+                <%}else{%>
+                    <div class="alert alert-success">
+                        <strong>Success!</strong>
+                        <%= message.message%>
+                    </div>
+                    <%}%>
+                        <%}%>
+                            <form action="/email" method="post">
+                                <div class="form-group">
+                                    <label for="email">to email:</label>
+                                    <input type="email" name="email" id="email" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">subject:</label>
+                                    <input type="text" name="subject" id="subject" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="content">content:</label>
+                                    <textarea name="content" id="content" cols="30" rows="10"
+                                        class="form-control"></textarea>
+                                </div>
+                                <button type="submit">submit</button>
+                            </form>
+
+    </div>
+</body>
+
+</html>
