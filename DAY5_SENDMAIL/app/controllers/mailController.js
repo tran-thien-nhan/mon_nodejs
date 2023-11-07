@@ -10,12 +10,12 @@ const sendMailNodejs = async (req, res) => {
         service: 'gmail',
         auth: {
             user: 'pipclupnomad@gmail.com',
-            pass: '',
+            pass: 'xaxt yiti kpxt qgtu',
         },
     });
 
     var mailOptions = {
-        from: 'your-gmail',
+        from: 'pipclupnomad@gmail.com',
         to:email,
         subject: subject,
         html: templateMail(subject, content)

@@ -12,7 +12,7 @@
     <div class="container">
         <h2>send mail form</h2>
         <%if(message){%>
-            <%if(message.type="error" ){%>
+            <%if(message.type=="error" ){%>
                 <div class="alert alert-danger">
                     <strong>Error!</strong>
                     <%= message.message%>
