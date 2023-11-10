@@ -79,7 +79,7 @@ const getFormUpdateUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const userId = req.params.id;
-    const updatedData = req.body;
+    const updatedData = req.body;    
     const user = await User.findOneAndUpdate({ _id: userId }, updatedData, { new: true });
     return res.redirect('/user');
 }
